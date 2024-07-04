@@ -1,0 +1,32 @@
+[alias]
+esp32   = "test --features esp32 --target xtensa-esp32-none-elf"
+esp32s2 = "test --features esp32s2 --target xtensa-esp32s2-none-elf"
+esp32s3 = "test --features esp32s3 --target xtensa-esp32s3-none-elf"
+esp32c2 = "test --features esp32c2 --target riscv32imc-unknown-none-elf"
+esp32c3 = "test --features esp32c3 --target riscv32imc-unknown-none-elf"
+esp32c6 = "test --features esp32c6 --target riscv32imac-unknown-none-elf"
+esp32h2 = "test --features esp32h2 --target riscv32imac-unknown-none-elf"
+
+[target.riscv32imc-unknown-none-elf]
+runner = "probe-rs run"
+[target.riscv32imac-unknown-none-elf]
+runner = "probe-rs run"
+[target.xtensa-esp32-none-elf]
+runner = "probe-rs run --chip esp32-3.3v"
+[target.xtensa-esp32s2-none-elf]
+runner = "probe-rs run"
+[target.xtensa-esp32s3-none-elf]
+runner = "probe-rs run"
+
+[target.'cfg(target_arch = "riscv32")']
+rustflags = [
+    "-C", "force-frame-pointers",
+]
+
+[target.'cfg(target_arch = "xtensa")']
+rustflags = [
+    "-C", "link-arg=-nostartfiles",
+]
+
+[unstable]
+build-std = ["core"]
