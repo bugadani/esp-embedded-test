@@ -1,18 +1,21 @@
 param (
-    [string]$target
+    [string[]]$targets
 )
 
 # esp32s2 is missing because serde-json-core is not compatible with it yet
-$targets = @("esp32", "esp32s3", "esp32c2", "esp32c3", "esp32c6", "esp32h2")
+$validTargets = @("esp32", "esp32s3", "esp32c2", "esp32c3", "esp32c6", "esp32h2")
 
 mkdir output -ErrorAction SilentlyContinue
 
-if ($target) {
-    if (-not $targets -contains $target) {
-        Write-Error "Invalid target specified. Valid targets are: $($targets -join ', ')"
-        exit 1
+if ($targets) {
+    foreach ($target in $targets) {
+        if (-not $validTargets -contains $target) {
+            Write-Error "Invalid target specified: $target. Valid targets are: $($validTargets -join ', ')"
+            exit 1
+        }
     }
-    $targets = @($target)
+} else {
+    $targets = $validTargets
 }
 
 # For each target, call cargo
