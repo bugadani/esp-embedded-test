@@ -411,6 +411,7 @@ dependencies = [
 name = "esp-hal-smoketest"
 version = "0.1.0"
 dependencies = [
+ "defmt",
  "defmt-rtt",
  "embedded-test",
  "esp-backtrace",

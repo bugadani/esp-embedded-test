@@ -48,6 +48,7 @@ esp32h2 = [
 xtensa = ["embedded-test/xtensa-semihosting"]
 
 [dependencies]
+defmt = "0.3.6"
 defmt-rtt = "0.4.0"
 esp-backtrace = { version = "0.13.0", features = [
     "exception-handler",
