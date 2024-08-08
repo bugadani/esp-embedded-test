@@ -2,8 +2,7 @@ param (
     [string[]]$targets
 )
 
-# esp32s2 is missing because serde-json-core is not compatible with it yet
-$validTargets = @("esp32", "esp32s3", "esp32c2", "esp32c3", "esp32c6", "esp32h2")
+$validTargets = @("esp32", "esp32s2", "esp32s3", "esp32c2", "esp32c3", "esp32c6", "esp32h2")
 
 mkdir output -ErrorAction SilentlyContinue
 
