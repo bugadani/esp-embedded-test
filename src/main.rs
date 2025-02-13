@@ -3,20 +3,16 @@
 
 use defmt_rtt as _;
 use esp_backtrace as _;
-use esp_hal::{clock::ClockControl, delay::Delay, peripherals::Peripherals, system::SystemControl};
 
-#[esp_hal::entry]
+defmt::timestamp!("{=u64:us}", esp_hal::time::now().ticks());
+
+#[esp_hal::main]
 fn main() -> ! {
-    let peripherals = Peripherals::take();
-    let system = SystemControl::new(peripherals.SYSTEM);
-    let clocks = ClockControl::boot_defaults(system.clock_control).freeze();
+    let _peripherals = esp_hal::init(Default::default());
 
-    let delay = Delay::new(&clocks);
-
+    let mut i = 0;
     loop {
-        defmt::info!("Tick");
-        delay.delay_millis(500);
-        defmt::info!("Tock");
-        delay.delay_millis(500);
+        defmt::info!("Tick {=i32}", i);
+        i = i.wrapping_add(1);
     }
 }

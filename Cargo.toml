@@ -48,18 +48,18 @@ esp32h2 = [
 xtensa = ["embedded-test/xtensa-semihosting"]
 
 [dependencies]
-defmt = "0.3.6"
+defmt = "0.3.10"
 defmt-rtt = "0.4.0"
-esp-backtrace = { version = "0.13.0", features = [
+esp-backtrace = { version = "0.15.0", features = [
     "exception-handler",
     "panic-handler",
     "defmt"
 ] }
-esp-hal = { version = "0.19.0" }
-esp-println = { version = "0.10.0" }
+esp-hal = { version = "0.23.0" }
+esp-println = { version = "0.13.0" }
 
 [dev-dependencies]
-embedded-test = { version = "0.4.0" }
+embedded-test = { version = "0.6.0" }
 
 [[test]]
 name = "example_test"
