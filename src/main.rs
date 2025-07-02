@@ -1,13 +1,14 @@
 #![no_std]
 #![no_main]
 
-use defmt_rtt as _;
-use esp_backtrace as _;
+use panic_rtt_target as _;
 
-defmt::timestamp!("{=u64:us}", esp_hal::time::now().ticks());
+esp_bootloader_esp_idf::esp_app_desc!();
 
 #[esp_hal::main]
 fn main() -> ! {
+    rtt_target::rtt_init_defmt!();
+
     let _peripherals = esp_hal::init(Default::default());
 
     let mut i = 0;
